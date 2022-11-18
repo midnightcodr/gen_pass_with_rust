@@ -1,40 +1,31 @@
 use rand::Rng;
 
-pub fn gen_pass (chars:String, len: u8) -> String {
-    const upper_chars: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const lower_chars: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
-    const numeric_chars: &[u8] = b"0123456789";
-    const pun_chars: &[u8] = b")(*&^%$#@!~";
+pub fn gen_pass (chars:String, len: u16) -> String {
+    const UPPER_CHARS: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const LOWER_CHARS: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
+    const NUMERIC_CHARS: &[u8] = b"0123456789";
+    const PUN_CHARS: &[u8] = b")(*&^%$#@!~";
     let mut bag: Vec<u8> = Vec::new();
     
     for char in chars.split("").filter(|&x| !x.is_empty()) {
         match char {
             "u" => {
-                bag.extend_from_slice(upper_chars);
+                bag.extend_from_slice(UPPER_CHARS);
             },
             "l" => {
-                bag.extend_from_slice(lower_chars);
+                bag.extend_from_slice(LOWER_CHARS);
             },
             "n" => {
-                bag.extend_from_slice(numeric_chars);
+                bag.extend_from_slice(NUMERIC_CHARS);
             },
             "p" => {
-                bag.extend_from_slice(pun_chars);
+                bag.extend_from_slice(PUN_CHARS);
             },
             _ => {
                 panic!("Incorrect chars");
-                // bag.extend_from_slice(upper_chars);
-                // bag.extend_from_slice(lower_chars);
-                // bag.extend_from_slice(numeric_chars);
-                // bag.extend_from_slice(pun_chars);
             }
         }
     }
-    // src2.iter().map(|b| *b as char).collect::<Vec<_>>()
-    // bag.iter().map(|b| *b as char).collect::<String>()
-    // const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-    //                         abcdefghijklmnopqrstuvwxyz\
-    //                         0123456789)(*&^%$#@!~";
     let mut rng = rand::thread_rng();
 
     let password: String = (0..len)
