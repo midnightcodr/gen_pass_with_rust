@@ -10,5 +10,8 @@ struct Args {
 }
 fn main() {
     let args = Args::parse();
-    println!("{}", gen_pass(args.chars, args.len).unwrap());
+    println!(
+        "{}",
+        gen_pass(args.chars, args.len).expect("Failed to call gen_pass:")
+    );
 }
