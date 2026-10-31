@@ -10,5 +10,5 @@ struct Args {
 }
 fn main() {
     let args = Args::parse();
-    println!("{}", gen_pass(args.chars, args.len));
+    println!("{}", gen_pass(args.chars, args.len).unwrap());
 }

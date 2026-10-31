@@ -1,6 +1,6 @@
 use rand::RngExt;
 
-pub fn gen_pass(chars: String, len: u16) -> String {
+pub fn gen_pass(chars: String, len: u16) -> Result<String, &'static str> {
     const UPPER_CHARS: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const LOWER_CHARS: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
     const NUMERIC_CHARS: &[u8] = b"0123456789";
@@ -22,7 +22,7 @@ pub fn gen_pass(chars: String, len: u16) -> String {
                 bag.extend_from_slice(PUN_CHARS);
             }
             _ => {
-                panic!("Incorrect chars");
+                return Err("Incorrect values for param --chars");
             }
         }
     }
@@ -36,5 +36,5 @@ pub fn gen_pass(chars: String, len: u16) -> String {
         })
         .collect();
 
-    password
+    Ok(password)
 }
